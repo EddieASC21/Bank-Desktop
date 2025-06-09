@@ -2,6 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LandingPage from './LandingPage.jsx';
 import Home from './Home.jsx';
+import './styles/App.css'
+
 
 function App() {
   return (
