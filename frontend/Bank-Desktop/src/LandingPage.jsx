@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import './LandingPage.css';
+import './styles/LandingPage.css';
 
 function LandingPage() {
     const navigate = useNavigate();
@@ -13,7 +13,7 @@ function LandingPage() {
     return (
         <div className="login-container">
             <div className="login-box">
-                <h1>Welcome</h1>
+                <h1>Welcome!</h1>
                 <p>Please login using your respective credentials</p>
                 <form onSubmit={handleLogin}>
                     <label>Username:</label>
