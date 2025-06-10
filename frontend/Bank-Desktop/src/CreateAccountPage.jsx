@@ -1,76 +1,94 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './styles/CreateAccount.css';
 
 function CreateAccountPage() {
+    const [step, setStep] = useState(1);
+    const [formData, setFormData] = useState({
+        firstName: '',
+        middleInitial: '',
+        lastName: '',
+        dob: '',
+        phone: '',
+        email: '',
+        accountType: '',
+        password: '',
+        confirmPassword: '',
+        securityQuestion: '',
+        securityAnswer: '',
+        agreed: false,
+    });
+
+    const handleChange = (e) => {
+        const { name, value, type, checked } = e.target;
+        setFormData({
+            ...formData,
+            [name]: type === 'checkbox' ? checked : value,
+        });
+    };
+
+    const nextStep = () => setStep((prev) => prev + 1);
+    const prevStep = () => setStep((prev) => prev - 1);
+
     const navigate = useNavigate();
 
-    const handleAccountCreated = (e) => {
-        e.preventDefault(); // prevent form submission reload
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        alert("Account Created Successfully!");
         navigate("/home");
     };
 
     return (
         <div className="create-account-container">
-            <div className="create-account-box">
-                <form onSubmit={handleAccountCreated}>
-                    <h1>Create an Account</h1>
-                    <p>Please fill in the following with your correct information</p>
+            <h2>Create Your Bank Account</h2>
+            <div className="step-indicator">Step {step} of 3</div>
+            <form onSubmit={handleSubmit}>
+                {step === 1 && (
+                    <div className="form-step">
+                        <input name="firstName" placeholder="First Name" value={formData.firstName} onChange={handleChange} required />
+                        <input name="middleInitial" placeholder="Middle Initial" value={formData.middleInitial} onChange={handleChange} />
+                        <input name="lastName" placeholder="Last Name" value={formData.lastName} onChange={handleChange} required />
+                        <input name="dob" type="date" value={formData.dob} onChange={handleChange} required />
+                        <input name="phone" placeholder="Phone Number" type="tel" value={formData.phone} onChange={handleChange} required />
+                        <input name="email" placeholder="Email" type="email" value={formData.email} onChange={handleChange} required />
+                    </div>
+                )}
 
-                    <label>First Name</label>
-                    <input type="text" required />
+                {step === 2 && (
+                    <div className="form-step">
+                        <select name="accountType" value={formData.accountType} onChange={handleChange} required>
+                            <option value="">Select Account Type</option>
+                            <option value="checking">Checking</option>
+                            <option value="savings">Savings</option>
+                            <option value="both">Both</option>
+                        </select>
+                        <input name="password" type="password" placeholder="Password" value={formData.password} onChange={handleChange} required />
+                        <input name="confirmPassword" type="password" placeholder="Confirm Password" value={formData.confirmPassword} onChange={handleChange} required />
+                    </div>
+                )}
 
-                    <label>Middle Initial</label>
-                    <input type="text" />
+                {step === 3 && (
+                    <div className="form-step">
+                        <select name="securityQuestion" value={formData.securityQuestion} onChange={handleChange} required>
+                            <option value="">Select a Security Question</option>
+                            <option value="pet">What was your first pet’s name?</option>
+                            <option value="school">What elementary school did you attend?</option>
+                            <option value="maiden">What is your mother's maiden name?</option>
+                        </select>
+                        <input name="securityAnswer" placeholder="Answer" value={formData.securityAnswer} onChange={handleChange} required />
+                        <div className="checkbox-row">
+                            <input type="checkbox" name="agreed" checked={formData.agreed} onChange={handleChange} required />
+                            <label htmlFor="agreed">I agree to the Terms and Privacy Policy</label>
+                        </div>
+                    </div>
+                )}
 
-                    <label>Last Name</label>
-                    <input type="text" required />
-
-                    <label>Date of Birth</label>
-                    <input type="date" required />
-
-                    <label>Phone Number</label>
-                    <input type="tel" required />
-
-                    <label>Account Type</label>
-                    <select required>
-                        <option value="">Select</option>
-                        <option value="checking">Checking</option>
-                        <option value="savings">Savings</option>
-                    </select>
-
-                    <label>Email Address</label>
-                    <input type="email" required />
-
-                    <label>Password</label>
-                    <input type="password" required />
-
-                    <label>Confirm Password</label>
-                    <input type="password" required />
-
-                    <label>Security Question</label>
-                    <select required>
-                        <option value="">Select one</option>
-                        <option value="pet">What was your first pet’s name?</option>
-                        <option value="school">What elementary school did you attend?</option>
-                        <option value="maiden">What is your mother's maiden name?</option>
-                    </select>
-
-                    <label>Answer</label>
-                    <input type="text" required />
-
-                    <label className="checkbox">
-                        <input type="checkbox" required />
-                        I agree to the Terms and Privacy Policy
-                    </label>
-
-                    <button type="submit">Create Account</button>
-
-                    <p className="login-redirect">
-                        Already have an account? <a href="/">Login here</a>
-                    </p>
-                </form>
-            </div>
+                <div className="button-row">
+                    {step > 1 && <button type="button" onClick={prevStep}>Back</button>}
+                    {step < 3 && <button type="button" onClick={nextStep}>Next</button>}
+                    {step === 3 && <button type="submit">Create Account</button>}
+                </div>
+            </form>
         </div>
     );
 }
