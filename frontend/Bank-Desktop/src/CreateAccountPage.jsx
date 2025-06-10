@@ -12,6 +12,8 @@ function CreateAccountPage() {
         phone: '',
         email: '',
         accountType: '',
+        initialDepositChecking: '',
+        initialDepositSavings: '',
         password: '',
         confirmPassword: '',
         securityQuestion: '',
@@ -30,20 +32,36 @@ function CreateAccountPage() {
     const validateStep = () => {
         if (step === 1) {
             return (
-                formData.firstName.trim() !== '' &&
-                formData.lastName.trim() !== '' &&
-                formData.dob !== '' &&
-                formData.phone.trim() !== '' &&
-                formData.email.trim() !== ''
+                formData.firstName.trim() &&
+                formData.lastName.trim() &&
+                formData.dob &&
+                formData.phone.trim() &&
+                formData.email.trim()
             );
         }
 
         if (step === 2) {
+            const hasValidDeposits =
+                (formData.accountType === 'checking' && formData.initialDepositChecking) ||
+                (formData.accountType === 'savings' && formData.initialDepositSavings) ||
+                (formData.accountType === 'both' &&
+                    formData.initialDepositChecking &&
+                    formData.initialDepositSavings);
+
             return (
-                formData.accountType !== '' &&
-                formData.password.trim() !== '' &&
-                formData.confirmPassword.trim() !== '' &&
+                formData.accountType &&
+                hasValidDeposits &&
+                formData.password &&
+                formData.confirmPassword &&
                 formData.password === formData.confirmPassword
+            );
+        }
+
+        if (step === 3) {
+            return (
+                formData.securityQuestion &&
+                formData.securityAnswer &&
+                formData.agreed
             );
         }
 
@@ -57,6 +75,7 @@ function CreateAccountPage() {
             alert("Please fill in all required fields correctly.");
         }
     };
+
     const prevStep = () => setStep((prev) => prev - 1);
 
     const navigate = useNavigate();
@@ -91,6 +110,50 @@ function CreateAccountPage() {
                             <option value="savings">Savings</option>
                             <option value="both">Both</option>
                         </select>
+
+                        {formData.accountType === 'checking' && (
+                            <input
+                                type="number"
+                                name="initialDepositChecking"
+                                placeholder="Initial Deposit for Checking"
+                                value={formData.initialDepositChecking}
+                                onChange={handleChange}
+                                required
+                            />
+                        )}
+
+                        {formData.accountType === 'savings' && (
+                            <input
+                                type="number"
+                                name="initialDepositSavings"
+                                placeholder="Initial Deposit for Savings"
+                                value={formData.initialDepositSavings}
+                                onChange={handleChange}
+                                required
+                            />
+                        )}
+
+                        {formData.accountType === 'both' && (
+                            <>
+                                <input
+                                    type="number"
+                                    name="initialDepositChecking"
+                                    placeholder="Initial Deposit for Checking"
+                                    value={formData.initialDepositChecking}
+                                    onChange={handleChange}
+                                    required
+                                />
+                                <input
+                                    type="number"
+                                    name="initialDepositSavings"
+                                    placeholder="Initial Deposit for Savings"
+                                    value={formData.initialDepositSavings}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </>
+                        )}
+
                         <input name="password" type="password" placeholder="Password" value={formData.password} onChange={handleChange} required />
                         <input name="confirmPassword" type="password" placeholder="Confirm Password" value={formData.confirmPassword} onChange={handleChange} required />
                     </div>
