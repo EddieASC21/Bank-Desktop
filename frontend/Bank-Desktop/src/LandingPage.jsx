@@ -15,6 +15,16 @@ function LandingPage() {
         navigate("/createAccount");
     };
 
+    const handleForgetUsername = (e) => {
+        e.preventDefault();
+        navigate("/forgetUsername");
+    };
+
+    const handleForgetPassword = (e) => {
+        e.preventDefault();
+        navigate("/forgetPassword");
+    };
+
     return (
         <div className="login-container">
             <div className="login-box">
@@ -29,6 +39,12 @@ function LandingPage() {
                 </form>
                 <div className="create-account-link">
                     <button onClick={handleCreateAccount}>Create An Account</button>
+                </div>
+                <div className="create-account-link">
+                    <button onClick={handleForgetUsername}>Forget Username</button>
+                <div className="create-account-link">
+                    <button onClick={handleForgetPassword}>Forget Password</button>
+                </div>
                 </div>
             </div>
         </div>
