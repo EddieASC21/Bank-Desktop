@@ -27,7 +27,9 @@ function LandingPage() {
                     <input type="password" required />
                     <button type="submit">Login</button>
                 </form>
-                <button onClick={handleCreateAccount}>Create An Account</button>
+                <div className="create-account-link">
+                    <button onClick={handleCreateAccount}>Create An Account</button>
+                </div>
             </div>
         </div>
     );

@@ -27,7 +27,36 @@ function CreateAccountPage() {
         });
     };
 
-    const nextStep = () => setStep((prev) => prev + 1);
+    const validateStep = () => {
+        if (step === 1) {
+            return (
+                formData.firstName.trim() !== '' &&
+                formData.lastName.trim() !== '' &&
+                formData.dob !== '' &&
+                formData.phone.trim() !== '' &&
+                formData.email.trim() !== ''
+            );
+        }
+
+        if (step === 2) {
+            return (
+                formData.accountType !== '' &&
+                formData.password.trim() !== '' &&
+                formData.confirmPassword.trim() !== '' &&
+                formData.password === formData.confirmPassword
+            );
+        }
+
+        return true;
+    };
+
+    const nextStep = () => {
+        if (validateStep()) {
+            setStep((prev) => prev + 1);
+        } else {
+            alert("Please fill in all required fields correctly.");
+        }
+    };
     const prevStep = () => setStep((prev) => prev - 1);
 
     const navigate = useNavigate();
