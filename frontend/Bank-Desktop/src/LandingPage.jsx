@@ -10,6 +10,11 @@ function LandingPage() {
         navigate("/home");
     };
 
+    const handleCreateAccount = (e) => {
+        e.preventDefault();
+        navigate("/createAccount");
+    };
+
     return (
         <div className="login-container">
             <div className="login-box">
@@ -22,6 +27,9 @@ function LandingPage() {
                     <input type="password" required />
                     <button type="submit">Login</button>
                 </form>
+                <div className="create-account-link">
+                    <button onClick={handleCreateAccount}>Create An Account</button>
+                </div>
             </div>
         </div>
     );

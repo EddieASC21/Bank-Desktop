@@ -19,6 +19,9 @@ body {
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     text-align: center;
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
 }
 
 .login-box h1 {
@@ -36,16 +39,18 @@ body {
     margin: 10px 0 5px;
     font-weight: 600;
     color: #374151;
+    text-align: left;
 }
 
 .login-box input {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     margin-bottom: 15px;
     border: 1px solid #d1d5db;
-    border-radius: 6px;
+    border-radius: 8px;
     outline: none;
     font-size: 14px;
+    box-sizing: border-box;
 }
 
 .login-box input:focus {
@@ -55,16 +60,33 @@ body {
 
 .login-box button {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     background-color: #2563eb;
     color: white;
     font-weight: bold;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.2s ease;
+    font-size: 16px;
 }
 
 .login-box button:hover {
     background-color: #1e40af;
+}
+
+.create-account-link {
+    margin-top: 12px;
+}
+
+.create-account-link button {
+    background-color: white;
+    color: #2563eb;
+    border: 2px solid #2563eb;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+.create-account-link button:hover {
+    background-color: #e0e7ff;
 }
