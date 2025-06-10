@@ -1,3 +1,4 @@
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './styles/Home.css';
 
@@ -9,7 +10,7 @@ function Home() {
     };
 
     return (
-        <div>
+        <div className="home-container">
             <header className="home-header">
                 <h1>Welcome Back!</h1>
                 <button onClick={handleLogout}>Logout</button>
