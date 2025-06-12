@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import LandingPage from './components/LandingPage.jsx';
-import Home from './components/Home.jsx';
-import CreateAccountPage from './components/CreateAccountPage.jsx';
-import ForgetPassword from './components/ForgetPassword.jsx'
-import ForgetUsername from './components/ForgetUsername.jsx'
+import LandingPage from './LandingPage.jsx';
+import Home from './Home.jsx';
+import CreateAccountPage from './CreateAccountPage.jsx';
+import ForgetPassword from './ForgetPassword.jsx'
+import ForgetUsername from './ForgetUsername.jsx'
 import './styles/App.css'
 
 
