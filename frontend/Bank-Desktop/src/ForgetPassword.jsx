@@ -12,6 +12,9 @@ function ForgetPassword() {
         confirmPassword: '',
     });
 
+    const [showNewPassword, setShowNewPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -93,22 +96,44 @@ function ForgetPassword() {
                     {step === 2 && (
                         <>
                             <label>New Password</label>
-                            <input
-                                type="password"
-                                name="newPassword"
-                                value={formData.newPassword}
-                                onChange={handleChange}
-                                required
-                            />
+                            <div className="password-input-container">
+                                <input
+                                    type={showNewPassword ? 'text' : 'password'}
+                                    name="newPassword"
+                                    value={formData.newPassword}
+                                    onChange={handleChange}
+                                    required
+                                />
+                                {formData.newPassword && (
+                                    <input
+                                        type="checkbox"
+                                        className="show-password-checkbox"
+                                        checked={showNewPassword}
+                                        onChange={() => setShowNewPassword(!showNewPassword)}
+                                        aria-label="Show new password"
+                                    />
+                                )}
+                            </div>
 
                             <label>Confirm New Password</label>
-                            <input
-                                type="password"
-                                name="confirmPassword"
-                                value={formData.confirmPassword}
-                                onChange={handleChange}
-                                required
-                            />
+                            <div className="password-input-container">
+                                <input
+                                    type={showConfirmPassword ? 'text' : 'password'}
+                                    name="confirmPassword"
+                                    value={formData.confirmPassword}
+                                    onChange={handleChange}
+                                    required
+                                />
+                                {formData.confirmPassword && (
+                                    <input
+                                        type="checkbox"
+                                        className="show-password-checkbox"
+                                        checked={showConfirmPassword}
+                                        onChange={() => setShowConfirmPassword(!showConfirmPassword)}
+                                        aria-label="Show confirm password"
+                                    />
+                                )}
+                            </div>
 
                             <button type="submit">Update Password</button>
                         </>
